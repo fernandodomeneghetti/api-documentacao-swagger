@@ -132,6 +132,31 @@
               "description": "Usuário não encontrado"
             }
           }
+        },
+
+        "delete": {
+          "tags": ["Usuarios"],
+          "summary": "Deletar um usuário existente",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "description": "ID do usuário para deletar"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Usuário deletado com sucesso"
+            },
+            "404": {
+              "description": "Usuário não encontrado"
+            }
+          }
         }
       }
     }
