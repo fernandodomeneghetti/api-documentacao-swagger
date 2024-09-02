@@ -1,47 +1,139 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Alunos",
-        "description": "Documentação sobre Aulos APIS",
-        "version": "1.0.0"
+      "title": "Alunos",
+      "description": "Documentação sobre APIs de Usuários",
+      "version": "1.0.0"
     },
-    "basePath": "/",
     "paths": {
-        "/api/usuario/all" : {
-            "get": {
-                "tags": ["Usuarios"],
-                "parameters": {
-
-                },
-                "responses": {
-
-                }
-            }
-        },
-
-        "/api/usuario": {
-            "post": {
-                "tags": ["Usuarios"],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "nome": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
+      "/api/usuario/all": {
+        "get": {
+          "tags": ["Usuarios"],
+          "summary": "Obter todos os usuários",
+          "responses": {
+            "200": {
+              "description": "Lista de usuários",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "nome": {
+                          "type": "string"
                         }
+                      }
                     }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Produto Criado"
-                    }
+                  }
                 }
+              }
             }
+          }
         }
+      },
+      "/api/usuario": {
+        "post": {
+          "tags": ["Usuarios"],
+          "summary": "Adicionar um novo usuário",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nome": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["nome"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Usuário criado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "nome": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/usuario/{id}": {
+        "put": {
+          "tags": ["Usuarios"],
+          "summary": "Atualizar um usuário existente",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "description": "ID do usuário para atualização"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nome": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["nome"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Usuário atualizado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "nome": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Usuário não encontrado"
+            }
+          }
+        }
+      }
     }
-}
+  }
+  
