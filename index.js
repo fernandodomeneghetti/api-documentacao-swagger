@@ -18,7 +18,10 @@ app.get("/api/usuario/all", (req, res) => {
 
 app.get("/api/usuario/getById/:id", (req, res) => {
     const { id } = req.params;
-    const index = usuarios.findIndex(u => u.id == id);
+    console.log('---- id', id)
+    const index = usuarios.findIndex(u => u.id == Number(id));
+
+    console.log('---- index', index)
     if (index > -1) {
         res.json(usuarios[index]);
     } else {
@@ -48,8 +51,19 @@ app.put("/api/usuario/:id", (req, res) => {
 // Rota DELETE para remover um usuário
 app.delete("/api/usuario/:id", (req, res) => {
   const { id } = req.params;
-  usuarios = usuarios.filter(u => u.id != id);
-  res.status(204).send();
+  const usuarioIndex = usuarios.findIndex(u => u.id == id);
+  if (usuarioIndex > -1) {
+    usuarios.splice(usuarioIndex, 1);
+
+    console.log('---- usuarios apos delete', usuarios)  
+    
+    res.status(204).send();
+  } else {
+    res.status(404).json({ message: "Usuário não encontrado" });
+  }
+
+
+  
 });
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(require('./swagger.json')));
