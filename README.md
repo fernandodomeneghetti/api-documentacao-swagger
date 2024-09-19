@@ -54,7 +54,7 @@ Dentro da prop "path", iremos ter todos os paths configurados de nossas APIS, es
 }
 ```
 
-Podemos e iremos utilizar no próximo get configuração de parametros através da query parameters, nesse caso, podemos usaremos a definição abaixo:
+Podemos e iremos utilizar no próximo get configuração de parametros através da query parameters, nesse caso, usaremos a definição abaixo:
 
 ```json
     "parameters": {
