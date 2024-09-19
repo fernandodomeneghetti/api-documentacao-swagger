@@ -18,10 +18,8 @@ app.get("/api/usuario/all", (req, res) => {
 
 app.get("/api/usuario/getById/:id", (req, res) => {
     const { id } = req.params;
-    console.log('---- id', id)
     const index = usuarios.findIndex(u => u.id == Number(id));
 
-    console.log('---- index', index)
     if (index > -1) {
         res.json(usuarios[index]);
     } else {
